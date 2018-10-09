@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>The Magical scifi Button</title>
+</head>
+
+<body>
+  <button id="scifi-button">LOTRs button</button>
+ 
+  <div class="column">
+      <div class="content">
+          <h3>Fav Info</h3>
+          <p> My fav movie is Lord of the Rings</p>
+              <div id="images"></div>
+          
+      </div>
+  </div>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    // Event listener for our scifi-button
+    $("#scifi-button").on("click", function() {
+
+      // Storing our giphy API URL for a random scifi image
+      var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=u5kaBQp2mSyQQHTM8LiYSnLLL7hGiM4x&tag=Lord of the Rings&rating=G";
+
+      // Perfoming an AJAX GET request to our queryURL
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+
+      // After the data from the AJAX request comes back
+        .then(function(response) {
+
+        // Saving the image_original_url property
+          var imageUrl = response.data.image_original_url;
+
+          // Creating and storing an image tag
+          var scifi = $("<img>");
+
+          // Setting the scifiImage src attribute to imageUrl
+          scifi.attr("src", imageUrl);
+          scifiImage.attr("alt", "scifi image");
+
+          // Prepending the scifiImage to the images div
+          $("#images").prepend(scifiImage);
+        });
+    });
+  </script>
+</body>
+
+</html>
